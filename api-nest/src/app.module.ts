@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DbModule } from './db/db.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { DbModule } from './db/db.module';
         autoCreate: true,
       }),
     }),
-    DbModule, // <-- FALTAVA ISSO
+    DbModule,
+    UsersModule, // <-- FALTAVA ISSO
   ],
 })
 export class AppModule {}
