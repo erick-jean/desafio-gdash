@@ -9,7 +9,7 @@ import { User } from './schemas/user.schema';
 export class UsersService {
   constructor(@InjectModel(User.name) public userModel: Model<User>) {}
 
-  async create(data: Partial<User>) {
+  async create(data: CreateUserDto) {
     const created = new this.userModel(data);
     return created.save();
   }
@@ -23,10 +23,16 @@ export class UsersService {
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).exec();
+    return this.userModel
+      .findByIdAndUpdate(id, updateUserDto, { new: true })
+      .exec();
   }
 
   remove(id: string) {
     return this.userModel.findByIdAndDelete(id).exec();
+  }
+
+  async findByEmailWithPassword(email: string) {
+    return this.userModel.findOne({ email }).select('+password');
   }
 }

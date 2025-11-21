@@ -4,7 +4,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DbModule } from './db/db.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     DbModule,
     AuthModule,
-    UsersModule, // <-- FALTAVA ISSO
+    UsersModule,
   ],
 })
 export class AppModule {}
