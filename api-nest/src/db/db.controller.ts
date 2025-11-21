@@ -1,16 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 
 @Controller('db')
-export class AppController {
+export class DbController {
   constructor(@InjectConnection() private readonly connection: Connection) {}
 
   @Get('status')
   getStatus() {
-    return {
-      state: this.connection.readyState,
-    };
+    return { state: this.connection.readyState };
   }
 }
