@@ -1,10 +1,19 @@
 import { Controller, Get, Post, Body, Res } from '@nestjs/common';
 import { WeatherService } from './weather.service';
-import type { CreateWeatherDto } from './dto/create-weather.dto';
+import { CreateWeatherDto } from './dto/create-weather.dto';
 import type { Response } from 'express';
-import { ApiTags, ApiProduces, ApiOkResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiTags,
+  ApiProduces,
+  ApiOkResponse,
+} from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @ApiTags('weather')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('api/weather')
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
