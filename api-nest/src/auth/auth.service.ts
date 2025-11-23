@@ -12,9 +12,9 @@ export class AuthService {
     private defaultUser: DefaultUserService,
   ) {}
 
-  async register(data) {
-    return this.usersService.create(data);
-  }
+  // async register(data) {
+  //   return this.usersService.create(data);
+  // }
 
   async login(email: string, password: string) {
     const userDefault = this.defaultUser.getUser();
