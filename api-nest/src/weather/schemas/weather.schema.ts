@@ -1,29 +1,49 @@
-import { Schema, model } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-const WeatherSchema = new Schema(
-  {
-    coord_longitude: Number,
-    coord_latitude: Number,
+@Schema({ timestamps: true })
+export class Weather extends Document {
+  @Prop()
+  coord_longitude: number;
 
-    descricao: String,
-    icon: String,
+  @Prop()
+  coord_latitude: number;
 
-    temp: Number,
-    sensacao_termica: Number,
-    humidity: Number,
+  @Prop()
+  descricao: string;
 
-    temp_min: Number,
-    temp_max: Number,
+  @Prop()
+  icon: string;
 
-    speed: Number,
+  @Prop()
+  temp: number;
 
-    sunrise: Number,
-    sunset: Number,
+  @Prop()
+  sensacao_termica: number;
 
-    id_city: Number,
-    name_city: String,
-  },
-  { timestamps: true }
-);
+  @Prop()
+  humidity: number;
 
-export default model('Weather', WeatherSchema);
+  @Prop()
+  temp_min: number;
+
+  @Prop()
+  temp_max: number;
+
+  @Prop()
+  speed: number;
+
+  @Prop()
+  sunrise: number;
+
+  @Prop()
+  sunset: number;
+
+  @Prop()
+  id_city: number;
+
+  @Prop()
+  name_city: string;
+}
+
+export const WeatherSchema = SchemaFactory.createForClass(Weather);

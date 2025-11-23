@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { WeatherService } from './weather.service';
 import { CreateWeatherDto } from './dto/create-weather.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('weather')
+@ApiTags('weather')
+@Controller('api/weather')
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
 
@@ -11,23 +13,23 @@ export class WeatherController {
     return this.weatherService.create(createWeatherDto);
   }
 
-  @Get()
+  @Get('/logs')
   findAll() {
     return this.weatherService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.weatherService.findOne(+id);
-  // }
+  @Get('/export.csv')
+  exportCsv() {
+    return this.weatherService.exportCsv();
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateWeatherDto: UpdateWeatherDto) {
-  //   return this.weatherService.update(+id, updateWeatherDto);
-  // }
+  @Get('/export.xlsx')
+  exportXlsx() {
+    return this.weatherService.exportXlsx();
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.weatherService.remove(+id);
-  // }
+  @Get('/insights')
+  getInsights() {
+    return this.weatherService.getInsights();
+  }
 }

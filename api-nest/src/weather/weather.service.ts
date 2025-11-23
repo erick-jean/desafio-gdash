@@ -1,13 +1,32 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateWeatherDto } from './dto/create-weather.dto';
+import { Model } from 'mongoose';
+import { Weather } from './entities/weather.entity';
 
 @Injectable()
 export class WeatherService {
-  create(createWeatherDto: CreateWeatherDto) {
-    return 'This action adds a new weather';
+  constructor(
+    @InjectModel(Weather.name)
+    private readonly weatherModel: Model<Weather>,
+  ) {}
+  async create(createWeatherDto: CreateWeatherDto) {
+    return await this.weatherModel.create(createWeatherDto);
   }
 
-  findAll() {
-    return `This action returns all weather`;
+  async findAll() {
+    return await this.weatherModel.find().lean();
+  }
+
+  exportCsv() {
+    return `This action exports weather data to CSV`;
+  }
+
+  exportXlsx() {
+    return `This action exports weather data to XLSX`;
+  }
+
+  getInsights() {
+    return `This action provides weather insights`;
   }
 }
